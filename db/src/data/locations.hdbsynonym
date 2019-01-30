@@ -1,0 +1,8 @@
+{
+  "LOCATIONS": {
+    "target": {
+      "object": "LOCATIONS",
+      "schema": "LOCATION_TEST"
+    }
+  }
+}

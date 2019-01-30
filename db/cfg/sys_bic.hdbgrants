@@ -1,0 +1,24 @@
+{
+  "hdi-sys-bic-service": {
+    "object_owner" : {
+      "object_privileges":[ 
+        { 
+          "schema":"_SYS_BIC",
+          "name": "VIEWS",
+          "type": "VIEW",
+          "privileges":["SELECT"]
+        }         
+      ]
+    },
+    "application_user" : {
+      "object_privileges":[ 
+        { 
+          "schema":"_SYS_BIC",
+          "name": "VIEWS",
+          "type": "VIEW",          
+          "privileges":["SELECT"]
+        }        
+      ]
+    }
+  }
+}

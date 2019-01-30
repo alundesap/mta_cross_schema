@@ -1,0 +1,1 @@
+xs cups CROSS_SCHEMA_LOCATIONS -p '{"host":"hxe2sp02.sap-a-team.com","port":"30013","user":"SYSTEM","password":"<pwd>","driver":"com.sap.db.jdbc.Driver","tags":["hana"] , "schema" : "LOCATION_TEST" }'

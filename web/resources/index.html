@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>MTA_Cross_Schema</title>
+</head>
+<body style="font-family: Tahoma, Geneva, sans-serif">
+<h2>MTA_Cross_Schema</h2>
+<p><a href="https://www.sap.com/developer/tutorials/xsa-create-user-provided-anonymous-service.html">SAP HANA XS Advanced, create a user-provided anonymous service for SAP HANA database Schemas</a></p>
+<p>This example app requires a uaa service instance.</p>
+<p>Use the XS-A CLI to create one with the following command.</p>
+<strong>xs create-service xsuaa default cross-uaa</strong><br />
+<strong>xs cups CROSS_SCHEMA_LOCATIONS -p '{"host":"hxe2sp02.sap-a-team.com","port":"30013","user":"SYSTEM","password":"Plak848!","driver":"com.sap.db.jdbc.Driver","tags":["hana"] , "schema" : "LOCATION_TEST" }'</strong><br />
+<br />
+<a href="locations.xsjs" target="xsjs">LOCATIONS</a><br />
+<br />
+<pre>
+This works nicely and the Grantor is the CROSS_1#OO user
+
+CALL "CROSS_1"."grant_role"(
+	IN_USER => 'INA_USER'/*<NVARCHAR(80)>*/,
+	IN_ROLE => 'cross_admin'/*<NVARCHAR(80)>*/,
+	EX_MESSAGE => ?
+);
+
+Another way is to create a new empty role (HDIACCESS) with the SYSTEM user and then to grant it to a user.
+Then grant the cross_admin role to the HDIACCESS role.  This 2-level works where granting cross_admin directly to a user doesn't.
+
+
+
+</pre>
+
+</body>
+</html>

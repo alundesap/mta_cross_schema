@@ -1,0 +1,26 @@
+{
+  "_M_TIME_DIMENSION": {
+    "target": {
+      "object": "M_TIME_DIMENSION",
+      "schema": "_SYS_BI"
+    }
+  },
+  "_M_TIME_DIMENSION_MONTH": {
+    "target": {
+      "object": "M_TIME_DIMENSION_MONTH",
+      "schema": "_SYS_BI"
+    }
+  },
+  "_M_TIME_DIMENSION_WEEK": {
+    "target": {
+      "object": "M_TIME_DIMENSION_WEEK",
+      "schema": "_SYS_BI"
+    }
+  },
+  "_M_TIME_DIMENSION_YEAR": {
+    "target": {
+      "object": "M_TIME_DIMENSION_YEAR",
+      "schema": "_SYS_BI"
+    }
+  }
+}

@@ -1,0 +1,3 @@
+hdbsql -i 00 -n localhost:30013 -u SYSTEM -d SYSTEMDB
+hdbsql -i 00 -n localhost:30015 -u SYSTEM -d HXE
+xs cups CROSS_SCHEMA_SYS_BIC -p '{"host":"hxe2sp02.sap-a-team.com","port":"30013","user":"SYSTEM","password":"<pwd>","driver":"com.sap.db.jdbc.Driver","tags":["hana"] , "schema" : "_SYS_BIC" }'

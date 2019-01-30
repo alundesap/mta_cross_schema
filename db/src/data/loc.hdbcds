@@ -1,0 +1,10 @@
+using LOCATIONS as LOC_TABLE;
+
+context loc {
+    define view LOC_VIEW as
+        select from LOC_TABLE
+        {
+            "POSTAL_CODE",
+            "CODE_CITY"
+        };
+};

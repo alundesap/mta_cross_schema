@@ -1,0 +1,108 @@
+ID: mta_cross_schema
+_schema-version: '2.0'
+description: Access Data from a non HDI schema
+version: 0.0.1
+modules:
+  - name: db
+    type: hdb
+    path: db
+    requires:
+      - name: hdi-container
+        properties:
+          TARGET_CONTAINER: '~{hdi-container-name}'
+      - name: CrossSchemaServices
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-locations-service
+          service: '~{locations-service-name}'   
+      - name: CrossSchemaSys
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-sys-service
+          service: ~{sys-service-name}   
+      - name: CrossSchemaSysBi
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-sys-bi-service
+          service: ~{sys-bi-service-name}   
+      - name: CrossSchemaSysBic
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-sys-bic-service
+          service: ~{sys-bic-service-name}   
+          
+  - name: js
+    type: nodejs
+    path: js
+    parameters:
+      memory: 96MB
+      disk: 256M
+    provides:
+      - name: js_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: cross-uaa
+      - name: hdi-container
+      - name: CROSS_SCHEMA_LOCATIONS
+      
+  - name: web
+    type: html5
+    path: web
+    parameters:
+      memory: 96MB
+      disk: 256M
+    requires:
+      - name: cross-uaa
+      - name: js_api
+        group: destinations
+        properties:
+          name: js_be
+          url: '~{url}'
+          forwardAuthToken: true
+          
+resources:
+  - name: cross-uaa
+    type: com.sap.xs.uaa
+    
+  - name: hdi-container
+    parameters:
+      config:
+        schema: CROSS
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+    
+  - name: CROSS_SCHEMA_LOCATIONS
+    type: org.cloudfoundry.existing-service
+    description: XS SQLCC service for ERP replicated schema
+    parameters:
+      service-name: CROSS_SCHEMA_LOCATIONS
+      
+  - name: CrossSchemaServices
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA_LOCATIONS
+    properties:
+      locations-service-name: '${service-name}'
+      
+  - name: CrossSchemaSys
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA_SYS
+    properties:
+      sys-service-name: ${service-name}  
+
+  - name: CrossSchemaSysBi
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA_SYS_BI
+    properties:
+      sys-bi-service-name: ${service-name} 
+
+  - name: CrossSchemaSysBic
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: CROSS_SCHEMA_SYS_BIC
+    properties:
+      sys-bic-service-name: ${service-name} 
